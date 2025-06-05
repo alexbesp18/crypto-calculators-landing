@@ -171,9 +171,15 @@ function App() {
                   </div>
                 </div>
                 
-                <button className="mt-8 w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 text-lg">
+                <a 
+                  href="https://paypal.me/AlexanderBespalov440/19"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 text-lg inline-block text-center"
+                  style={{textDecoration: 'none'}}
+                >
                   Get Access Now
-                </button>
+                </a>
                 
                 <p className="mt-4 text-sm text-gray-500">
                   Secure payment • Instant delivery • No subscription
