@@ -1,42 +1,36 @@
-import React from 'react';
-import { Calculator, TrendingUp, DollarSign, Zap, ArrowRight, Shield, Clock, BarChart3 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Calculator, TrendingUp, DollarSign, Zap, ArrowRight, Shield, Clock, BarChart3, Building2, Target, Coffee, Copy, Check, Mail } from 'lucide-react';
 
 function App() {
+  const [copied, setCopied] = useState(false);
+  const btcAddress = 'bc1q7fcyqpenn624vky3dvda5nd6h48e2xjslz3037';
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(btcAddress);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
   const calculators = [
     {
-      title: "Bitcoin Mining Profitability Calculator",
-      description: "Advanced mining profitability analysis with real-time data and comprehensive cost modeling",
-      url: "https://miner-profit-version-3-claude.vercel.app",
-      icon: <Zap className="w-6 h-6" />,
-      features: ["Real-time electricity costs", "Hardware efficiency", "Pool fees", "Market analysis"]
-    },
-    {
-      title: "Portfolio Analyzer", 
-      description: "Comprehensive crypto portfolio tracking with advanced charts and performance metrics",
-      url: "https://portfolio-analyzer-three.vercel.app",
-      icon: <TrendingUp className="w-6 h-6" />,
-      features: ["Portfolio tracking", "Performance charts", "Risk assessment", "Asset allocation"]
-    },
-    {
-      title: "Miner Acquisition Calculator",
-      description: "Calculate the optimal timing and costs for acquiring Bitcoin mining hardware", 
-      url: "https://miner-acquisition-calculator.vercel.app",
-      icon: <Calculator className="w-6 h-6" />,
-      features: ["Hardware pricing", "ROI analysis", "Market timing", "Cost optimization"]
-    },
-    {
       title: "BTC Loan Calculator",
-      description: "Advanced Bitcoin-backed loan calculations with collateral and interest analysis",
+      description: "Advanced Bitcoin-backed loan calculations with real-time LTV monitoring, liquidation analysis, and scenario planning",
       url: "https://btc-loan-calculator.vercel.app",
       icon: <DollarSign className="w-6 h-6" />,
-      features: ["Collateral ratios", "Interest calculations", "Liquidation analysis", "Risk management"]
+      features: ["LTV monitoring", "Liquidation price alerts", "Price shock scenarios", "Future projections"]
     },
     {
-      title: "Miner Price Tracker",
-      description: "Real-time mining hardware price tracking and market analysis tools",
-      url: "https://miner-price-tracker.vercel.app",
-      icon: <BarChart3 className="w-6 h-6" />,
-      features: ["Price monitoring", "Market trends", "Hardware comparisons", "Alert system"]
+      title: "Hosted Mining Portfolio Manager",
+      description: "Comprehensive mining portfolio management across multiple hosting companies with tax optimization and projections",
+      url: "https://hosted-mining-portfolio.vercel.app", // You'll need to deploy this
+      icon: <Building2 className="w-6 h-6" />,
+      features: ["Multi-company tracking", "Tax optimization", "Performance analytics", "Export/Import data"]
+    },
+    {
+      title: "Miner Acquisition Price Calculator",
+      description: "Calculate maximum acquisition prices for mining hardware to achieve target after-tax profits with bonus depreciation",
+      url: "https://miner-acquisition-calculator.vercel.app",
+      icon: <Target className="w-6 h-6" />,
+      features: ["Target profit analysis", "Tax optimization", "20+ miner models", "Scenario planning"]
     }
   ];
 
@@ -48,10 +42,10 @@ function App() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Calculator className="w-8 h-8 text-blue-600" />
-              <h1 className="text-2xl font-bold text-gray-900">Alex BTC Calcs</h1>
+              <h1 className="text-2xl font-bold text-gray-900">Mine and Hodl BTC Calculators</h1>
             </div>
             <div className="text-sm text-gray-600">
-              Professional Crypto Calculators
+              Professional Bitcoin Tools
             </div>
           </div>
         </div>
@@ -61,26 +55,26 @@ function App() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center">
           <h2 className="text-4xl font-bold text-gray-900 sm:text-5xl">
-            Professional Crypto Calculators
+            Mine and Hodl BTC Calculators
           </h2>
           <p className="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
-            Make informed decisions with our suite of advanced cryptocurrency calculation tools. 
-            Built for traders, miners, and investors who demand accuracy.
+            Advanced calculation tools for Bitcoin mining, lending, and investment decisions. 
+            Built for professionals who need accurate financial modeling.
           </p>
           
           {/* Trust Indicators */}
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto">
             <div className="flex items-center justify-center space-x-2 text-gray-600">
               <Shield className="w-5 h-5 text-green-500" />
-              <span>Secure & Private</span>
+              <span>Data Stays Local</span>
             </div>
             <div className="flex items-center justify-center space-x-2 text-gray-600">
               <Clock className="w-5 h-5 text-blue-500" />
-              <span>Real-time Data</span>
+              <span>Real-time Calculations</span>
             </div>
             <div className="flex items-center justify-center space-x-2 text-gray-600">
               <Calculator className="w-5 h-5 text-purple-500" />
-              <span>Professional Grade</span>
+              <span>Tax Optimized</span>
             </div>
           </div>
         </div>
@@ -105,18 +99,6 @@ function App() {
                   {calc.description}
                 </p>
                 
-                <div className="mb-6">
-                  <h4 className="text-sm font-medium text-gray-900 mb-2">Features:</h4>
-                  <ul className="text-sm text-gray-600 space-y-1">
-                    {calc.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center space-x-2">
-                        <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
                 <a 
                   href={calc.url}
                   target="_blank"
@@ -132,59 +114,60 @@ function App() {
         </div>
       </section>
 
-      {/* Pricing Section */}
+      {/* Custom Calculator CTA */}
+      <section className="bg-gradient-to-r from-purple-50 to-blue-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+          <div className="bg-white rounded-2xl shadow-lg p-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Want a custom calculator?
+            </h3>
+            <p className="text-lg text-gray-600 mb-6">
+              Need a specific Bitcoin calculation tool for your business or personal use? 
+              I can build custom calculators tailored to your exact needs.
+            </p>
+            <a 
+              href="mailto:alex@egmail.net"
+              className="inline-flex items-center justify-center px-8 py-3 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors duration-200"
+            >
+              Let me know
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
       <section className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center">
+          <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900">
-              Premium Access
+              Why Choose Our Calculators?
             </h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Get unlimited access to all professional calculators
-            </p>
           </div>
           
-          <div className="mt-12 max-w-lg mx-auto">
-            <div className="bg-gray-50 rounded-2xl p-8 border-2 border-blue-200">
-              <div className="text-center">
-                <h3 className="text-2xl font-bold text-gray-900">Lifetime Access</h3>
-                <div className="mt-4">
-                  <span className="text-4xl font-bold text-gray-900">$19</span>
-                  <span className="text-gray-600"> one-time</span>
-                </div>
-                <p className="mt-4 text-gray-600">
-                  Unlimited access to all current and future calculators
-                </p>
-                
-                <div className="mt-6">
-                  <div className="flex items-center justify-center space-x-2 text-green-600 mb-2">
-                    <Shield className="w-5 h-5" />
-                    <span className="font-medium">Instant Access</span>
-                  </div>
-                  <div className="flex items-center justify-center space-x-2 text-green-600 mb-2">
-                    <Calculator className="w-5 h-5" />
-                    <span className="font-medium">All Calculators</span>
-                  </div>
-                  <div className="flex items-center justify-center space-x-2 text-green-600">
-                    <TrendingUp className="w-5 h-5" />
-                    <span className="font-medium">Future Updates</span>
-                  </div>
-                </div>
-                
-                <a 
-                  href="https://paypal.me/AlexanderBespalov440/19"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-8 w-full bg-blue-600 text-white font-bold py-4 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200 text-lg inline-block text-center"
-                  style={{textDecoration: 'none'}}
-                >
-                  Get Access Now
-                </a>
-                
-                <p className="mt-4 text-sm text-gray-500">
-                  Secure payment • Instant delivery • No subscription
-                </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <BarChart3 className="w-8 h-8 text-blue-600" />
               </div>
+              <h3 className="text-lg font-semibold mb-2">Professional Grade</h3>
+              <p className="text-gray-600">Built with real-world mining and lending experience. Every calculation accounts for fees, taxes, and market conditions.</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                <Shield className="w-8 h-8 text-green-600" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Privacy First</h3>
+              <p className="text-gray-600">All calculations run locally in your browser. Your financial data never leaves your device.</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="mx-auto w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                <TrendingUp className="w-8 h-8 text-purple-600" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Save & Export</h3>
+              <p className="text-gray-600">Export your calculations, save scenarios, and import data for seamless workflow integration.</p>
             </div>
           </div>
         </div>
@@ -196,13 +179,40 @@ function App() {
           <div className="text-center">
             <div className="flex items-center justify-center space-x-2 mb-4">
               <Calculator className="w-6 h-6" />
-              <span className="text-xl font-bold">Alex BTC Calcs</span>
+              <span className="text-xl font-bold">Mine and Hodl BTC Calculators</span>
             </div>
             <p className="text-gray-400">
-              Professional cryptocurrency calculation tools for informed decision making
+              Professional Bitcoin calculation tools for mining, lending, and investment analysis
             </p>
+            <div className="mt-6 space-y-3">
+              <a 
+                href="https://strike.me/mineandhodl" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-2 bg-orange-500 text-white font-medium rounded-lg hover:bg-orange-600 transition-colors duration-200"
+              >
+                <Coffee className="w-4 h-4 mr-2" />
+                Buy me a coffee
+              </a>
+              <div className="text-sm text-gray-400">
+                <div className="flex items-center justify-center space-x-2">
+                  <span>BTC:</span>
+                  <button
+                    onClick={copyToClipboard}
+                    className="bg-gray-800 px-2 py-1 rounded text-xs hover:bg-gray-700 transition-colors duration-200 flex items-center space-x-1"
+                  >
+                    <code>{btcAddress}</code>
+                    {copied ? (
+                      <Check className="w-3 h-3 text-green-400" />
+                    ) : (
+                      <Copy className="w-3 h-3" />
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
             <div className="mt-8 text-sm text-gray-500">
-              © 2025 Alex BTC Calcs. All rights reserved.
+              © 2025 Mine and Hodl BTC Calculators. All calculations are estimates. Always verify with your own analysis.
             </div>
           </div>
         </div>
